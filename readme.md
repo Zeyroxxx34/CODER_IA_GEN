@@ -1,3 +1,4 @@
+```
 Coder IA Gen
 
 
@@ -77,3 +78,5 @@ Lors de modifications du code (Frontend ou Backend), il est nécessaire de recon
 
 docker compose build
 docker compose up
+
+```

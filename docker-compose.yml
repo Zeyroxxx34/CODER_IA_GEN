@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - my_bridge
+
+  fastapi:
+    build: ./back-fastapi
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgres://user:password@postgres:5432/mydb
+    depends_on:
+      - postgres
+    networks:
+      - my_bridge
+
+  vite-react:
+    build:
+      context: ./coder_ia_gen
+      args:
+        VITE_API_URL: http://localhost:8000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - fastapi
+    networks:
+      - my_bridge
+
+volumes:
+  postgres_data:
+
+networks:
+  my_bridge:
+    driver: bridge

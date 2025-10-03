@@ -12,7 +12,7 @@ Backend : FastAPI + SQLAlchemy
 
 Base de données : PostgreSQL
 
-Containerisation : Docker & Docker Compose
+Containerisation : Docker
 
 Cette application implémente un compteur stocké dans PostgreSQL, exposé via FastAPI et manipulable depuis l’interface React.
 
